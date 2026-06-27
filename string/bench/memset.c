@@ -13,9 +13,10 @@
 #include "stringlib.h"
 #include "benchlib.h"
 
-#define ITERS_RANDOM  5000
-#define ITERS_MEDIUM 20000000
-#define ITERS_LARGE 1000000
+#define ITERS_RANDOM	20000
+#define ITERS_MEDIUM	100000000
+#define ITERS_LARGE	2000000
+
 #define NUM_TESTS 16384
 #define MIN_SIZE 32768
 #define MAX_SIZE (1024 * 1024)
@@ -26,6 +27,7 @@ static uint8_t a[MAX_SIZE + 4096] __attribute__((__aligned__(4096)));
   printf (STR);					\
   RUN (TESTFN, memset);				\
   RUNA64 (TESTFN, __memset_aarch64);		\
+  RUNA64 (TESTFN, __memset_scalar);		\
   RUNSVE (TESTFN, __memset_aarch64_sve);	\
   RUNMOPS (TESTFN, __memset_aarch64_mops);	\
   RUNA32 (TESTFN, __memset_arm);		\
